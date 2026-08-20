@@ -1,0 +1,73 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    # Insert at end
+    def insert_at_end(self, data):
+        new_node = Node(data)
+
+        if self.head is None:
+            self.head = new_node
+            return
+
+        temp = self.head
+
+        while temp.next is not None:
+            temp = temp.next
+
+        temp.next = new_node
+
+    # Delete from end
+    def delete_from_end(self):
+        # Case 1: List is empty
+        if self.head is None:
+            print("List is empty")
+            return
+
+        # Case 2: Only one node
+        if self.head.next is None:
+            self.head = None
+            return
+
+        # Case 3: More than one node
+        temp = self.head
+
+        # Move to second-last node
+        while temp.next.next is not None:
+            temp = temp.next
+
+        # Remove last node
+        temp.next = None
+
+    # Display
+    def display(self):
+        temp = self.head
+
+        while temp is not None:
+            print(temp.data, end=" -> ")
+            temp = temp.next
+
+        print("None")
+
+
+# Main program
+ll = LinkedList()
+
+ll.insert_at_end(10)
+ll.insert_at_end(20)
+ll.insert_at_end(30)
+ll.insert_at_end(40)
+
+print("Original list:")
+ll.display()
+
+ll.delete_from_end()
+
+print("After deletion:")
+ll.display()
