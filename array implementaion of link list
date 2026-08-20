@@ -1,0 +1,49 @@
+class LinkedList:
+    def __init__(self, size):
+        self.data = [None] * size
+        self.next = [-1] * size
+        self.head = -1
+        self.free = 0
+        self.size = size
+
+    def insert(self, value):
+        if self.free == self.size:
+            print("List is full")
+            return
+
+        index = self.free
+        self.data[index] = value
+        self.next[index] = -1
+
+        if self.head == -1:
+            self.head = index
+        else:
+            current = self.head
+
+            while self.next[current] != -1:
+                current = self.next[current]
+
+            self.next[current] = index
+
+        self.free += 1
+
+    def display(self):
+        current = self.head
+
+        while current != -1:
+            print(self.data[current], end=" -> ")
+            current = self.next[current]
+
+        print("NULL")
+
+
+# Create linked list of size 5
+list1 = LinkedList(5)
+
+# Insert elements
+list1.insert(10)
+list1.insert(20)
+list1.insert(30)
+
+# Display linked list
+list1.display()
